@@ -31,11 +31,22 @@ config.inactive_pane_hsb = {
 }
 
 config.keys = {
+	-- タブ操作 (Alt)
+	{ key = "t", mods = "ALT", action = wezterm.action.SpawnTab("CurrentPaneDomain") },
+	{ key = "n", mods = "ALT", action = wezterm.action.ActivateTabRelative(1) },
+	{ key = "p", mods = "ALT", action = wezterm.action.ActivateTabRelative(-1) },
+	{ key = "1", mods = "ALT", action = wezterm.action.ActivateTab(0) },
+	{ key = "2", mods = "ALT", action = wezterm.action.ActivateTab(1) },
+	{ key = "3", mods = "ALT", action = wezterm.action.ActivateTab(2) },
+	{ key = "4", mods = "ALT", action = wezterm.action.ActivateTab(3) },
+	{ key = "5", mods = "ALT", action = wezterm.action.ActivateTab(4) },
+
 	{
 		key = "N",
 		mods = "CTRL|SHIFT",
 		action = wezterm.action.SpawnWindow,
 	},
+	{ key = "q", mods = "ALT", action = wezterm.action.CloseCurrentTab({ confirm = true }) },
 	{
 		key = "w",
 		mods = "ALT",
