@@ -6,7 +6,7 @@ local config = wezterm.config_builder()
 config.automatically_reload_config = true
 config.use_ime = true
 config.window_background_opacity = 0.85
-config.win32_system_backdrop = "Acrylic"
+-- config.win32_system_backdrop = "Acrylic"
 config.default_prog = { "powershell.exe" }
 
 -- Add user fonts directory
@@ -37,8 +37,8 @@ config.keys = {
 		action = wezterm.action.SpawnWindow,
 	},
 	{
-		key = "X",
-		mods = "CTRL|SHIFT",
+		key = "w",
+		mods = "ALT",
 		action = wezterm.action.CloseCurrentPane({ confirm = true }),
 	},
 	{
