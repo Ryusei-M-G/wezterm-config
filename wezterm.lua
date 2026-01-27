@@ -1,21 +1,14 @@
--- Pull in the wezterm API
 local wezterm = require("wezterm")
 
--- This will hold the configuration.
 local config = wezterm.config_builder()
 config.automatically_reload_config = true
 config.use_ime = true
 config.window_background_opacity = 0.8
-config.win32_system_backdrop = "Acrylic"
-config.default_prog = { "powershell.exe" }
-
--- Add user fonts directory
-config.font_dirs = { "C:\\Users\\kiran\\AppData\\Local\\Microsoft\\Windows\\Fonts" }
+config.macos_window_background_blur = 15
 
 config.font_size = 13.0
 config.color_scheme = "Ayu Dark (Gogh)"
 
--- 黒→ピンクの斜めグラデーション背景
 config.background = {
 	{
 		source = {
@@ -29,20 +22,17 @@ config.background = {
 	},
 }
 
--- タブが1つのときはタブバー非表示
 config.hide_tab_bar_if_only_one_tab = true
 
--- ペイン分割線の色（控えめなグレー）
 config.colors = {
 	split = "#414868",
 }
 
--- 非アクティブペインを少し暗く
 config.inactive_pane_hsb = {
 	saturation = 0.8,
 	brightness = 0.6,
 }
-
+-- keymap
 config.keys = {
 	-- タブ操作 (Alt)
 	{ key = "t", mods = "ALT", action = wezterm.action.SpawnTab("CurrentPaneDomain") },
