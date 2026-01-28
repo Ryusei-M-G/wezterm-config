@@ -3,6 +3,9 @@ local wezterm = require("wezterm")
 
 -- This will hold the configuration.
 local config = wezterm.config_builder()
+
+-- 設定ディレクトリをモジュールパスに追加
+package.path = package.path .. ";" .. wezterm.config_dir .. "/?.lua"
 config.automatically_reload_config = true
 config.use_ime = true
 config.window_background_opacity = 0.8
@@ -43,59 +46,12 @@ config.inactive_pane_hsb = {
 	brightness = 0.6,
 }
 
-config.keys = {
-	-- タブ操作 (Alt)
-	{ key = "t", mods = "ALT", action = wezterm.action.SpawnTab("CurrentPaneDomain") },
-	{ key = "n", mods = "ALT", action = wezterm.action.ActivateTabRelative(1) },
-	{ key = "p", mods = "ALT", action = wezterm.action.ActivateTabRelative(-1) },
-	{ key = "1", mods = "ALT", action = wezterm.action.ActivateTab(0) },
-	{ key = "2", mods = "ALT", action = wezterm.action.ActivateTab(1) },
-	{ key = "3", mods = "ALT", action = wezterm.action.ActivateTab(2) },
-	{ key = "4", mods = "ALT", action = wezterm.action.ActivateTab(3) },
-	{ key = "5", mods = "ALT", action = wezterm.action.ActivateTab(4) },
+-- Leader キー設定 (Ctrl+q)
+config.leader = { key = "q", mods = "CTRL", timeout_milliseconds = 2000 }
 
-	{
-		key = "N",
-		mods = "CTRL|SHIFT",
-		action = wezterm.action.SpawnWindow,
-	},
-	{ key = "q", mods = "ALT", action = wezterm.action.CloseCurrentTab({ confirm = true }) },
-	{
-		key = "w",
-		mods = "ALT",
-		action = wezterm.action.CloseCurrentPane({ confirm = true }),
-	},
-	{
-		key = "|",
-		mods = "CTRL|SHIFT",
-		action = wezterm.action.SplitHorizontal({ domain = "CurrentPaneDomain" }),
-	},
-	{
-		key = "~",
-		mods = "CTRL|SHIFT",
-		action = wezterm.action.SplitVertical({ domain = "CurrentPaneDomain" }),
-	},
-	-- Paneサイズ変更 (Shift+Alt+Arrow)
-	{
-		key = "LeftArrow",
-		mods = "SHIFT|ALT",
-		action = wezterm.action.AdjustPaneSize({ "Left", 5 }),
-	},
-	{
-		key = "RightArrow",
-		mods = "SHIFT|ALT",
-		action = wezterm.action.AdjustPaneSize({ "Right", 5 }),
-	},
-	{
-		key = "UpArrow",
-		mods = "SHIFT|ALT",
-		action = wezterm.action.AdjustPaneSize({ "Up", 5 }),
-	},
-	{
-		key = "DownArrow",
-		mods = "SHIFT|ALT",
-		action = wezterm.action.AdjustPaneSize({ "Down", 5 }),
-	},
-}
+-- キーマップを別ファイルから読み込み
+local keymaps = require("keymaps")
+config.keys = keymaps.keys
+config.key_tables = keymaps.key_tables
 -- and finally, return the configuration to wezterm
 return config
